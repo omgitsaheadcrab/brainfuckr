@@ -1,18 +1,22 @@
-mod cli;
-use cli::Arguments;
 use clap::Parser;
 
+mod cli;
+use cli::Arguments;
+
 mod bf;
-use bf::{Interpreter, get_instructions_from_file};
+use bf::*;
 
 fn main() {
     let args = Arguments::parse();
 
+    let instruction_chars = get_instruction_chars_from_file(args.src);
+
     let interpreter = Interpreter {
-        array: vec![0; args.arr],
-        inst_array: get_instructions_from_file(args.src),
-        inst_pointer: 0,
+        data: vec![0; args.arr],
         data_pointer: 0,
+        inst: get_instructions(&instruction_chars),
+        inst_pointer: 0,
     };
-    println!("{:?}", interpreter);
+
+    println!("{:?}", interpreter.inst);
 }
