@@ -1,7 +1,5 @@
-use std::char;
-use std::fs;
-use std::io::Read;
-use std::num;
+use std::io::{self, Error, ErrorKind, Read};
+use std::{char, fs, num};
 
 #[derive(Debug, PartialEq)]
 pub enum Commands {
@@ -65,16 +63,16 @@ impl Interpreter {
     }
 }
 
-pub fn get_instruction_chars_from_file(src: std::path::PathBuf) -> Vec<char> {
-    let src_str = fs::read_to_string(src).expect("File not found.");
+pub fn get_instruction_chars_from_file(src: std::path::PathBuf) -> Result<Vec<char>, io::Error> {
+    let src_str = fs::read_to_string(src)?;
     let inst: Vec<char> = src_str
         .chars()
         .filter(|c| matches!(*c, '>' | '<' | '+' | '-' | '.' | ',' | '[' | ']'))
         .collect();
-    inst
+    Ok(inst)
 }
 
-pub fn get_instructions(insts: &[char]) -> Vec<Commands> {
+pub fn get_instructions(insts: &[char]) -> Result<Vec<Commands>, io::Error> {
     let mut cmds: Vec<Commands> = Vec::new();
     let mut stack = Vec::new();
 
@@ -93,18 +91,24 @@ pub fn get_instructions(insts: &[char]) -> Vec<Commands> {
             ']' => {
                 cmds.push(Commands::RightBracket(0));
                 if stack.pop() != Some(']') {
-                    panic! {"Parentheses unbalanced."}
-                };
+                    return Err(Error::new(
+                        ErrorKind::InvalidData,
+                        "Parentheses unbalanced.",
+                    ));
+                }
             }
             _ => (),
         }
     }
 
     if !stack.is_empty() {
-        panic!("Parentheses unbalanced.");
+        return Err(Error::new(
+            ErrorKind::InvalidData,
+            "Parentheses unbalanced.",
+        ));
     }
 
-    set_jumps(cmds)
+    Ok(set_jumps(cmds))
 }
 
 fn set_jumps(mut cmds: Vec<Commands>) -> Vec<Commands> {
@@ -136,23 +140,23 @@ mod tests {
             '[', '<', '>', '.', ',', ']', '+', '-', '+', '+', '+', '<', '>', '[', ']',
         ];
         assert_eq!(
-            get_instruction_chars_from_file(temp_dir.path().join("bf.b")),
+            get_instruction_chars_from_file(temp_dir.path().join("bf.b")).unwrap(),
             inst
         );
     }
 
     #[test]
-    #[should_panic(expected = "File not found.")]
-    fn test_get_instruction_chars_from_file_panic_no_file() {
+    fn test_get_instruction_chars_from_file_err_no_file() {
         let temp_dir = TestFiles::new();
-        get_instruction_chars_from_file(temp_dir.path().join("nope.b"));
+        assert!(get_instruction_chars_from_file(temp_dir.path().join("nope.b")).is_err());
     }
 
     #[test]
-    #[should_panic(expected = "Parentheses unbalanced.")]
-    fn test_get_instructions_panic_unbalanced() {
+    fn test_get_instructions_error_unbalanced() {
         let unbalanced = vec!['[', ']', '['];
-        get_instructions(&unbalanced);
+        assert!(get_instructions(&unbalanced).is_err());
+        let unbalanced = vec!['[', ']', ']'];
+        assert!(get_instructions(&unbalanced).is_err());
     }
 
     #[test]
@@ -171,6 +175,6 @@ mod tests {
             Commands::Increment,
             Commands::RightBracket(0),
         ];
-        assert_eq!(cmds, cmds_calculated);
+        assert_eq!(cmds, cmds_calculated.unwrap());
     }
 }
