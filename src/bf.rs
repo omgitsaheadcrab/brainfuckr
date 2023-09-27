@@ -1,4 +1,7 @@
+use std::char;
 use std::fs;
+use std::io::Read;
+use std::num;
 
 #[derive(Debug, PartialEq)]
 pub enum Commands {
@@ -14,10 +17,52 @@ pub enum Commands {
 
 #[derive(Debug)]
 pub struct Interpreter {
-    pub data: Vec<u8>,
+    pub data: Vec<num::Wrapping<u8>>,
     pub data_pointer: usize,
     pub inst: Vec<Commands>,
     pub inst_pointer: usize,
+}
+
+impl Interpreter {
+    pub fn execute(&mut self) {
+        while self.inst_pointer < self.inst.len() {
+            match self.inst[self.inst_pointer] {
+                Commands::Increment => self.data[self.data_pointer] += 1,
+                Commands::Decrement => self.data[self.data_pointer] -= 1,
+                Commands::MoveRight => self.data_pointer += 1,
+                Commands::MoveLeft => self.data_pointer -= 1,
+                Commands::Print => self.print(),
+                Commands::Read => self.read(),
+                Commands::LeftBracket(value) => {
+                    if self.data[self.data_pointer] == std::num::Wrapping(0) {
+                        self.inst_pointer = value;
+                    }
+                }
+                Commands::RightBracket(value) => {
+                    if self.data[self.data_pointer] != std::num::Wrapping(0) {
+                        self.inst_pointer = value;
+                    }
+                }
+            }
+            self.inst_pointer += 1;
+        }
+    }
+
+    fn print(&self) {
+        let c: u8 = self.data[self.data_pointer].0;
+        print!("{}", c as char);
+    }
+
+    fn read(&mut self) {
+        let input: Option<u8> = std::io::stdin()
+            .bytes()
+            .next()
+            .and_then(|result| result.ok());
+
+        if let Some(value) = input {
+            self.data[self.data_pointer] = std::num::Wrapping(value);
+        }
+    }
 }
 
 pub fn get_instruction_chars_from_file(src: std::path::PathBuf) -> Vec<char> {
