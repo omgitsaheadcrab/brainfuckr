@@ -8,6 +8,9 @@ use cli::Arguments;
 mod bf;
 use bf::*;
 
+mod cmds;
+use cmds::*;
+
 fn main() -> Result<(), Box<dyn Error>> {
     let args = Arguments::parse();
     let instruction_chars = get_instruction_chars_from_file(args.src)?;
