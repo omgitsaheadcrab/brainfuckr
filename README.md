@@ -1,5 +1,5 @@
 <div align='center'>
-<img src=images/brainfuckr.png alt="logo" width=400 height=200 />
+<img src=images/brainfuckr.png alt="logo" width=400 height=400 />
 <h1>brainfuckr</h1>
 <p>Yet another brainfuck interpreter written in Rust.</p>
 <h4> <a href="https://docs.rs/brainfuckr/latest/brainfuckr/"> Documentation </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Request Feature </a> </h4>
