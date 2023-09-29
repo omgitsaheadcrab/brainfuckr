@@ -23,7 +23,9 @@ Tests can be run using cargo
 cargo test
 ```
 
-### :running: Run Locally
+### :running: Usage
+
+![brainfuckr in action](images/brainfuckr.gif)
 
 Evaluate example `.bf` source 
 ```bash
