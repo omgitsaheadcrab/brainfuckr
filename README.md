@@ -25,9 +25,11 @@ cargo test
 
 ### :running: Usage
 
-![brainfuckr in action](images/brainfuckr.gif)
+<p align="center">
+   <img src="images/brainfuckr.gif" alt="brainfuckr in action!"/>
+</p>
 
-Evaluate example `.bf` source 
+Evaluate example `.bf` source file 
 ```bash
 cargo run -- --src examples/hello_world.b
 ```
