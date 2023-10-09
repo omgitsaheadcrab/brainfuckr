@@ -1,5 +1,5 @@
 <div align='center'>
-<img src=images/brainfuckr.png alt="logo" width=398 height=371 />
+<img src=https://github.com/omgitsaheadcrab/brainfuckr/raw/master/images/brainfuckr.png alt="logo" width=398 height=371 />
 <h1>brainfuckr</h1>
 <p>Yet another <em>brainfuck</em> interpreter written in Rust.</p>
 <h4> <a href="https://docs.rs/brainfuckr/latest/brainfuckr/"> Documentation </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Request Feature </a> </h4>
@@ -7,26 +7,26 @@
 
 [![MITLicensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-## :toolbox: Getting Started
+## Getting Started
 
-### :gear: Installation
+### Installation
 
 To begin, clone the repository with
 ```bash
 git clone https://github.com/omgitsaheadcrab/brainfuckr
 ```
 
-### :test_tube: Running Tests
+### Running Tests
 
 Tests can be run using cargo
 ```bash
 cargo test
 ```
 
-### :running: Usage
+### Usage
 
 <p align="center">
-   <img src="images/brainfuckr.gif" alt="brainfuckr in action!"/>
+   <img src="https://github.com/omgitsaheadcrab/brainfuckr/raw/master/images/brainfuckr.gif" alt="brainfuckr in action!"/>
 </p>
 
 Evaluate example `.b` source file 
@@ -34,10 +34,10 @@ Evaluate example `.b` source file
 cargo run -- --src tests/test_files/hello_world.b
 ```
 
-## :warning: License
+## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-## :gem: Acknowledgements
+## Acknowledgements
 
 - [brainfuck.org](http://brainfuck.org/)
