@@ -1,7 +1,7 @@
 <div align='center'>
 <img src=images/brainfuckr.png alt="logo" width=398 height=371 />
 <h1>brainfuckr</h1>
-<p>Yet another brainfuck interpreter written in Rust.</p>
+<p>Yet another <em>brainfuck</em> interpreter written in Rust.</p>
 <h4> <a href="https://docs.rs/brainfuckr/latest/brainfuckr/"> Documentation </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/omgitsaheadcrab/brainfuckr/issues"> Request Feature </a> </h4>
 </div>
 
@@ -29,9 +29,9 @@ cargo test
    <img src="images/brainfuckr.gif" alt="brainfuckr in action!"/>
 </p>
 
-Evaluate example `.bf` source file 
+Evaluate example `.b` source file 
 ```bash
-cargo run -- --src examples/hello_world.b
+cargo run -- --src tests/test_files/hello_world.b
 ```
 
 ## :warning: License
