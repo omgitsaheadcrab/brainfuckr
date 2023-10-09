@@ -69,7 +69,7 @@ mod integration {
         let mut cmd = Command::cargo_bin("brainfuckr").unwrap();
         let assert = cmd
             .arg("--src")
-            .arg("tests/test_files/hello_world.b")
+            .arg("examples/hello_world.b")
             .assert();
         assert.success().stdout("Hello World!\n");
     }
@@ -77,7 +77,7 @@ mod integration {
     #[test]
     fn addition() {
         let mut cmd = Command::cargo_bin("brainfuckr").unwrap();
-        let assert = cmd.arg("--src").arg("tests/test_files/add2.b").assert();
+        let assert = cmd.arg("--src").arg("examples/add2.b").assert();
         assert.success().stdout("7");
     }
 }
