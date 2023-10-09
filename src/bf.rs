@@ -1,7 +1,10 @@
+//! brainfuck interpreter logic
+
 use crate::cmds;
 use std::io::Read;
 use std::{char, num};
 
+/// brainfuck interpreter
 pub struct Interpreter {
     pub data: Vec<num::Wrapping<u8>>,
     pub data_pointer: usize,
@@ -10,6 +13,7 @@ pub struct Interpreter {
 }
 
 impl Interpreter {
+    /// Execute instructions
     pub fn execute(&mut self) {
         while self.inst_pointer < self.inst.len() {
             match self.inst[self.inst_pointer] {
@@ -34,11 +38,13 @@ impl Interpreter {
         }
     }
 
+    /// Output char at data pointer location to stdout
     fn print(&self) {
         let c: u8 = self.data[self.data_pointer].0;
         print!("{}", c as char);
     }
 
+    /// Read single char from stdin to data pointer location
     fn read(&mut self) {
         let input: Option<u8> = std::io::stdin()
             .bytes()

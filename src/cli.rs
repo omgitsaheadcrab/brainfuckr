@@ -1,3 +1,5 @@
+//! Command line arguments parser
+
 use clap::Parser;
 
 /// Yet another brainfuck interpreter written in Rust

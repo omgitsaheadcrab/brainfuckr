@@ -1,3 +1,5 @@
+//! brainfuck source code parsing
+
 use std::fs;
 use std::io::{self, Error, ErrorKind};
 
@@ -42,6 +44,7 @@ pub enum Commands {
     RightBracket(usize),
 }
 
+/// Return valid brainfuck instruction set from a specified source file
 pub fn get_instruction_chars_from_file(src: std::path::PathBuf) -> Result<Vec<char>, io::Error> {
     let src_str = fs::read_to_string(src)?;
     let inst: Vec<char> = src_str
@@ -51,6 +54,7 @@ pub fn get_instruction_chars_from_file(src: std::path::PathBuf) -> Result<Vec<ch
     Ok(inst)
 }
 
+/// Return [Commands](Commands) mapped from instruction set
 pub fn get_instructions(insts: &[char]) -> Result<Vec<Commands>, io::Error> {
     let mut cmds: Vec<Commands> = Vec::new();
     let mut stack = Vec::new();
@@ -90,6 +94,7 @@ pub fn get_instructions(insts: &[char]) -> Result<Vec<Commands>, io::Error> {
     Ok(set_jumps(cmds))
 }
 
+/// Set instruction pointer jumps for opening and closing brackets
 fn set_jumps(mut cmds: Vec<Commands>) -> Vec<Commands> {
     let mut stack = Vec::new();
 
