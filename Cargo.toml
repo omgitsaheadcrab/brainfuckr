@@ -1,5 +1,11 @@
 [package]
 name = "brainfuckr"
+description = "Yet another brainfuck interpreter written in Rust"
+license = "MIT"
+license-file = "LICENCE"
+documentation = "https://docs.rs/brainfuckr/latest/brainfuckr"
+homepage = "https://github.com/omgitsaheadcrab/brainfuckr"
+repository = "https://github.com/omgitsaheadcrab/brainfuckr"
 version = "0.1.0"
 edition = "2021"
 
