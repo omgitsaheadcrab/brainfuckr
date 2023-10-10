@@ -1,15 +1,20 @@
 [package]
 name = "brainfuckr"
 description = "Yet another brainfuck interpreter written in Rust"
-license = "MIT"
 license-file = "LICENSE"
 documentation = "https://docs.rs/brainfuckr/latest/brainfuckr"
 homepage = "https://github.com/omgitsaheadcrab/brainfuckr"
 repository = "https://github.com/omgitsaheadcrab/brainfuckr"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "brainfuckr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "brainfuckr"
+path = "src/main.rs"
 
 [dependencies]
 assert_cmd = "2.0.12"
